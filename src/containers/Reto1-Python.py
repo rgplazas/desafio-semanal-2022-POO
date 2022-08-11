@@ -1,5 +1,7 @@
 # el codigo convierte a minusculas asi que se puede escribir tanto en mayus como minus
 def anagrama(pal1,pal2):
+    pal1 = pal1.lower()
+    pal2 = pal2.lower()
     if len(pal1) != len(pal2) or pal1 == pal2:
         print(False)
     else:
@@ -12,4 +14,4 @@ def anagrama(pal1,pal2):
         else:
             print(False)
 
-anagrama(input("Ingrese la primera palabra:").lower(),input("Ingrese la segunda palabra:").lower())
+anagrama(input("Ingrese la primera palabra:"),input("Ingrese la segunda palabra:"))
