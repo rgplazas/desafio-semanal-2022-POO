@@ -10,8 +10,8 @@ export default function RtdbContex(props) {
     const refRetosMensual = ref(db, "retosMensual/");
 
     //query firebase
-    const queryRetosSemanal = query(refRetosSemanal, orderByChild("order/")); // ordenar por la clave orden todos los elementos semanal
-    const queryRetosMensual = query(refRetosMensual, orderByChild("order/")); // ordenar por la clave orden todos los elementos mensual
+    const queryRetosSemanal = query(refRetosSemanal, orderByChild("app/")); // ordenar por la clave orden todos los elementos semanal
+    const queryRetosMensual = query(refRetosMensual, orderByChild("app/")); // ordenar por la clave orden todos los elementos mensual
     //const queryRetosSemanal = query(refRetosSemanal, limitToFirst(3)); //trae los primeros tres retos de retosSemanal
     //const queryRetosMensual = query(refRetosMensual, limitToFirst(3)); //trae los primeros tres retos de retosMensual
     //const queryRetosSemanal = query(refRetosSemanal, limitToLast(3)); //trae los ultimos tres retos de retosSemanal

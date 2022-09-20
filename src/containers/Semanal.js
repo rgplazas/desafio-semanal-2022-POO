@@ -18,7 +18,7 @@ export default function Semanal() {
                             <Row>
                                 {
                                     retosSemanal.map((item) => (
-                                        <RetoSemanal {...item} key={item.order}></RetoSemanal>
+                                        <RetoSemanal {...item} key={item.app}></RetoSemanal>
                                     ))
                                 }
                             </Row>
