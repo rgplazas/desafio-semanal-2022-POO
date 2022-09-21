@@ -1,6 +1,6 @@
 import ContextoAuth from "./Contexto";
 import { useEffect, useState } from "react";
-import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
+import { GoogleAuthProvider, GithubAuthProvider ,signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../services/firebase";
 
 export default function AuthContex(props) {
@@ -17,6 +17,11 @@ export default function AuthContex(props) {
     const loginWithGoogle = () => {
         const googleProvider = new GoogleAuthProvider();
         return signInWithPopup(auth, googleProvider);
+    };
+    // logeo por github
+    const loginWithGitHub = () => {
+        const gitHubProvider = new GithubAuthProvider();
+        return signInWithPopup(auth, gitHubProvider);
     };
     // cerrar session
     const logout = () => signOut(auth);
@@ -41,6 +46,7 @@ export default function AuthContex(props) {
                 user,
                 loading,
                 loginWithGoogle,
+                loginWithGitHub,
                 logout,
                 resetPassword
             }}>

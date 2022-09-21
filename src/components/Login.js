@@ -11,7 +11,7 @@ export default function Login() {
         password: "",
     });
 
-    const { login, loginWithGoogle, resetPassword} = useContext(Contexto);
+    const { login, loginWithGoogle, resetPassword, loginWithGitHub} = useContext(Contexto);
 
     const handleChange = ({ target: { value, name } }) =>
         setUser({ ...user, [name]: value });
@@ -33,6 +33,16 @@ export default function Login() {
     const handleLogin = async () => {
         try {
             await loginWithGoogle();
+            navigate("/");
+        } catch (error) {
+            setError(error.message);
+        }
+
+    }
+
+    const handleLoginGitHub = async () => {
+        try {
+            await loginWithGitHub();
             navigate("/");
         } catch (error) {
             setError(error.message);
@@ -103,7 +113,7 @@ export default function Login() {
                                         </div>
                                         <div className="mt-3 mb-0 text-center">
                                             <Button className="m-4" onClick={handleLogin}><BsGoogle></BsGoogle></Button>
-                                            <Button className="m-4"><BsGithub></BsGithub></Button>
+                                            <Button className="m-4" onClick={handleLoginGitHub}><BsGithub></BsGithub></Button>
                                         </div>
                                     </div>
                                 </div>
