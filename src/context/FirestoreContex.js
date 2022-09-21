@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ContextoFirestore from "./Contexto";
-import { collection, getDocs, query, orderBy, limit} from "firebase/firestore";
+import { collection, getDocs, query, orderBy} from "firebase/firestore";
 import { firestore } from "../services/firebase";
 
 export default function FirestoreContex(props) {
