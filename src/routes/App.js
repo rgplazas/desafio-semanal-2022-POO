@@ -19,7 +19,7 @@ function App() {
             <Routes>
               <Route exact path="/login" element={<Login />}></Route>
               <Route exact path="/registro" element={<Registro />}></Route>
-              <Route exact path="/" element={<ProtetecRoute><Home /></ProtetecRoute>}></Route>
+              <Route exact path="/" element={<ProtetecRoute><FirestoreContex ><Home /></FirestoreContex ></ProtetecRoute>}></Route>
               <Route exact path="/semanales2022" element={<ProtetecRoute><FirestoreContex ><Semanal /></FirestoreContex></ProtetecRoute>}></Route>
               <Route exact path="/mensuales2022" element={<ProtetecRoute><FirestoreContex><Mensual /></FirestoreContex></ProtetecRoute>}></Route>
             </Routes>

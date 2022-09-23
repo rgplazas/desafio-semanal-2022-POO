@@ -1,10 +1,16 @@
 //import "../assets/css/Home.css";
-import Container from "react-bootstrap/Container";
-
+import { useContext, useEffect } from "react";
+import { Container, Row } from "react-bootstrap";
+import Contexto from "../context/Contexto";
+import Usuarios from "../components/Usuarios";
 export default function Home() {
+    const { listameUsuarios, usuarios } = useContext(Contexto);
+    useEffect(() => {
+        listameUsuarios();
+    }, []);
     return (
         <>
-            <Container style={{height: '90vh'}}>
+            <Container style={{ height: '90vh' }}>
                 <br />
                 <h1 className="notion-title">
                     Mejora tus habilidades <b>↑</b>
@@ -50,6 +56,13 @@ export default function Home() {
                         </article>
                     </div>
                 </div>
+                <Row>
+                    {
+                        usuarios.map((item) => (
+                            <Usuarios {...item} key={item.uid}></Usuarios>
+                        ))
+                    }
+                </Row>
             </Container>
         </>
     );
