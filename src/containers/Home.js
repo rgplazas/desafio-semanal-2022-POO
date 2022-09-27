@@ -4,10 +4,11 @@ import { Container, Row } from "react-bootstrap";
 import Contexto from "../context/Contexto";
 import Usuarios from "../components/Usuarios";
 export default function Home() {
-    const { listameUsuarios, usuarios } = useContext(Contexto);
+    const { listameUsuarios, usuarios, createUser } = useContext(Contexto);
     useEffect(() => {
         listameUsuarios();
     }, []);
+
     return (
         <>
             <Container style={{ height: '90vh' }}>
