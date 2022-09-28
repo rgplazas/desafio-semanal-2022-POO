@@ -6,8 +6,6 @@ import { firestore } from "../services/firebase";
 export default function FirestoreContex(props) {
     const { children } = props;
 
-    const { user } = useContext(ContextoFirestore);
-
     //Estados de los useState
     const [estadoUser, setEstadoUser] = useState([]);
     const [estadoSemanal, setEstadoSemanal] = useState([]);
@@ -32,18 +30,6 @@ export default function FirestoreContex(props) {
     const queryRetosUsuariosOrdenado = query(refRetosUsuarios);
     const queryRetosSemanalOrdenado = query(refRetosSemanal, orderBy("app", "asc"));
     const queryRetosMensualOrdenado = query(refRetosMensual, orderBy("app", "asc"));
-
-    const createUser = async () => {
-        await addDoc(refRetosUsuarios, {  
-            uid: user.uid,
-            name: user.displayName,
-            email: user.email,
-            images: user.photoURL,
-            provider: user.providerData[0].providerId,
-            emailVerificado: user.emailVerified,
-            conectado : true }
-        );
-    };
 
     const listameUsuarios = async () => {
         const querySnapshot = await getDocs(queryRetosUsuariosOrdenado);
@@ -79,7 +65,6 @@ export default function FirestoreContex(props) {
                 retosSemanal: estadoSemanal,
                 retosMensual: estadoMensual,
                 listameUsuarios,
-                createUser,
                 listameRetosSemanal,
                 listameRetosMensual
             }}>

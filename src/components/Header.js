@@ -5,9 +5,10 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import iconoCabecera from "../assets/statics/loading.gif";
 
 export default function Header() {
-    const { logout, user } = useContext(Contexto);
+    const { logout, user, updateUserDBConeccion} = useContext(Contexto);
 
     const handleLogout = async () => {
+        updateUserDBConeccion(user);
         await logout()
     }
 

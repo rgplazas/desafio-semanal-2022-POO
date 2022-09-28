@@ -4,7 +4,7 @@ import { Container, Row } from "react-bootstrap";
 import Contexto from "../context/Contexto";
 import Usuarios from "../components/Usuarios";
 export default function Home() {
-    const { listameUsuarios, usuarios, createUser } = useContext(Contexto);
+    const { listameUsuarios, usuarios } = useContext(Contexto);
     useEffect(() => {
         listameUsuarios();
     }, []);
@@ -60,7 +60,7 @@ export default function Home() {
                 <Row>
                     {
                         usuarios.map((item) => (
-                            <Usuarios {...item} key={item.uid}></Usuarios>
+                            <Usuarios {...item} key={item.localId}></Usuarios>
                         ))
                     }
                 </Row>

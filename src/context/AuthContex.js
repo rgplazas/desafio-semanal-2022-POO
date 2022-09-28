@@ -1,7 +1,8 @@
 import ContextoAuth from "./Contexto";
 import { useEffect, useState } from "react";
-import { GoogleAuthProvider, GithubAuthProvider ,signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../services/firebase";
+import { GoogleAuthProvider, GithubAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
+import { setDoc, doc, updateDoc } from "firebase/firestore"
+import { auth,  firestore } from "../services/firebase";
 
 export default function AuthContex(props) {
     const { children } = props;
@@ -28,7 +29,7 @@ export default function AuthContex(props) {
     //Se comprueba si el usuario esta logeado o no
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    
+
     const resetPassword = async (email) => sendPasswordResetEmail(auth, email);
 
     useEffect(() => {
@@ -38,12 +39,40 @@ export default function AuthContex(props) {
         });
         return () => unsubuscribe();
     }, []);
+
+    // coleccion de datos
+    const collectionUsuarios = "usuarios";
+
+    const documentUserDB = async (userLogin) => {
+        let userLogeo = userLogin.user.reloadUserInfo;
+        if (userLogeo)
+        await setDoc(doc(firestore, collectionUsuarios , userLogeo.localId), {
+            localId:userLogeo.localId,
+            name:userLogeo.displayName,
+            email:userLogeo.email,
+            images:userLogeo.photoUrl,
+            provider:userLogeo.providerUserInfo[0].providerId,
+            ultimoInicioSesion:userLogeo.lastLoginAt,
+            conectado: true
+        })
+    }
+
+    const updateUserDBConeccion = async (userlogout) => {
+        let userLogeo = userlogout.reloadUserInfo;
+        if (userLogeo)
+        await updateDoc(doc(firestore,collectionUsuarios,userLogeo.localId ),{
+            conectado: false
+        })
+    }
+
     return (
         <>
             <ContextoAuth.Provider value={{
                 signup,
                 login,
                 user,
+                documentUserDB,
+                updateUserDBConeccion,
                 loading,
                 loginWithGoogle,
                 loginWithGitHub,

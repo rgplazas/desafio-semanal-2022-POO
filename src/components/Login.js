@@ -11,7 +11,7 @@ export default function Login() {
         password: "",
     });
 
-    const { login, loginWithGoogle, resetPassword, loginWithGitHub} = useContext(Contexto);
+    const { login, loginWithGoogle, resetPassword, loginWithGitHub, documentUserDB} = useContext(Contexto);
 
     const handleChange = ({ target: { value, name } }) =>
         setUser({ ...user, [name]: value });
@@ -23,7 +23,8 @@ export default function Login() {
         e.preventDefault();
         setError("");
         try {
-            await login(user.email, user.password);
+            const usuarioLogin = await login(user.email, user.password);
+            documentUserDB(usuarioLogin);
             navigate("/");
         } catch (error) {
             setError(error.message);
@@ -32,7 +33,8 @@ export default function Login() {
 
     const handleLogin = async () => {
         try {
-            await loginWithGoogle();
+            const usuarioLoginGoogle = await loginWithGoogle();
+            documentUserDB(usuarioLoginGoogle);
             navigate("/");
         } catch (error) {
             setError(error.message);
@@ -42,7 +44,8 @@ export default function Login() {
 
     const handleLoginGitHub = async () => {
         try {
-            await loginWithGitHub();
+            const usuarioLoginGitHub = await loginWithGitHub();
+            documentUserDB(usuarioLoginGitHub);
             navigate("/");
         } catch (error) {
             setError(error.message);
