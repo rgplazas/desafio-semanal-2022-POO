@@ -1,14 +1,6 @@
 //import "../assets/css/Home.css";
-import { useContext, useEffect } from "react";
-import { Container, Row } from "react-bootstrap";
-import Contexto from "../context/Contexto";
-import Usuarios from "../components/Usuarios";
+import { Container } from "react-bootstrap";
 export default function Home() {
-    const { listameUsuarios, usuarios } = useContext(Contexto);
-    useEffect(() => {
-        listameUsuarios();
-    }, []);
-
     return (
         <>
             <Container style={{ height: '90vh' }}>
@@ -57,13 +49,6 @@ export default function Home() {
                         </article>
                     </div>
                 </div>
-                <Row>
-                    {
-                        usuarios.map((item) => (
-                            <Usuarios {...item} key={item.localId}></Usuarios>
-                        ))
-                    }
-                </Row>
             </Container>
         </>
     );

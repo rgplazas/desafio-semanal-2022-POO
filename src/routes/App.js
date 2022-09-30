@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../containers/Home";
 import Semanal from "../containers/Semanal";
 import Mensual from "../containers/Mensual";
+import Chat from "../containers/Chat";
 import Layout from "../components/Layout";
 import Login from "../components/Login";
 import Registro from "../components/Registro";
@@ -22,6 +23,7 @@ function App() {
               <Route exact path="/" element={<ProtetecRoute><FirestoreContex ><Home /></FirestoreContex ></ProtetecRoute>}></Route>
               <Route exact path="/semanales2022" element={<ProtetecRoute><FirestoreContex ><Semanal /></FirestoreContex></ProtetecRoute>}></Route>
               <Route exact path="/mensuales2022" element={<ProtetecRoute><FirestoreContex><Mensual /></FirestoreContex></ProtetecRoute>}></Route>
+              <Route exact path="/chat" element={<ProtetecRoute><FirestoreContex><Chat /></FirestoreContex></ProtetecRoute>}></Route>
             </Routes>
           </Layout>
         </AuthContex>
